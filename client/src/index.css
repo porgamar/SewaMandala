@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.navLi {
+    @apply mx-3 text-gray-600 rounded-md py-1 px-5;
+}
+
+.navLi:hover {
+    @apply text-black bg-gray-200 transition ease-in;
+}
+
+.btn:hover{
+    @apply transition ease-in ;
+}

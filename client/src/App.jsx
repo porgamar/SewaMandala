@@ -5,6 +5,8 @@ function App() {
   return (
     <div>
       <Navbar />
+
+      HELLO sir
     </div>
 
   )

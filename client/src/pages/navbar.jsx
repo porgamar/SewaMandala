@@ -3,12 +3,12 @@ import Image from "../assets/sewa1.png"
 function Navbar() {
     return (
         <div class="flex justify-between items-center max-h-40 mt-4 mx-25">
-            <img src={Image} alt="SewaMandala Logo" class="max-w-70" ></img>
+            <a href="home.jsx"><img src={Image} alt="SewaMandala Logo" class="max-w-70" ></img></a>
             <ul class="flex items-center justify-center">
-                <li class="navLi"> <a href="#"> Home</a></li>
-                <li class="navLi"> <a href="#"> Explore</a></li>
+                <li class="navLi"> <a href="home.jsx"> Home</a></li>
+                <li class="navLi"> <a href="Explore.jsx"> Explore</a></li>
                 <li class="navLi"> <a href="#"> About us</a></li>
-                <li class="navLi"> <a href="#"> Our Team</a></li>
+                <li class="navLi"> <a href="#bottom"> Our Team</a></li>
             </ul>
             <div>
                 <button class="btn py-1 px-5 rounded-lg border-solid border-2 mr-10 border-gray-700 hover:border-green-500 hover:text-green-500">Sign up</button>

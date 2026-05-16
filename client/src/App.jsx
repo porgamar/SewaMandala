@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      push test ignore
+      repo push test
     </div>
     
   )

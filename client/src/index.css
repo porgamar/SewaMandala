@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
 @import "tailwindcss";
+
+@theme{
+     --font-display: "Fjalla One", sans-serif;
+     --color-primary: #ffffff; 
+}
 
 .navLi {
     @apply mx-3 text-gray-600 rounded-md py-1 px-5;

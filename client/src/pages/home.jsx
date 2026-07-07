@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./navbar";
+import Footer from "./footer";
 import HeroImg from "../assets/hero.png"
 
 function IndexPage(){
@@ -12,6 +13,9 @@ function IndexPage(){
             </div>
             <img  src={HeroImg} className="max-h-full max-w-full " alt="hero image"></img>
         </div>
+        aaaa <br></br>
+        aaaa <br></br>
+        
         </>
     );
 }

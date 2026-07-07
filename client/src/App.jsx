@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./pages/navbar";
+import Footer from "./pages/footer";
 import IndexPage from "./pages/home";
 import UserProfile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </Router>
+      <Footer />
     </>
   )
 }

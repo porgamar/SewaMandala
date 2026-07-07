@@ -17,3 +17,21 @@
 .btn:hover{
     @apply transition ease-in ;
 }
+
+.fNavLi{
+    @apply px-15 ;
+}
+
+.fNavLink{
+    @apply mb-3 text-gray-600
+}
+.fNavLink:hover{
+    @apply mb-3 text-gray-900 underline transition cursor-pointer
+}
+
+.fNavLogo{
+    @apply p-2 mx-2 border-solid  rounded-full bg-zinc-100/0
+}
+.fNavLogo:hover{
+    @apply  bg-zinc-100/100 
+}

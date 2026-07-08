@@ -8,8 +8,8 @@ function Navbar() {
             <ul className="flex items-center justify-center">
                 <li className="navLi"> <Link to="/">Home</Link> </li>
                 <li className="navLi"> <Link to="/Explore">Explore</Link> </li>
-                <li className="navLi"> <Link to="/">About Us</Link> </li>
-                <li className="navLi"> <Link to="/">Our Team</Link> </li>
+                <li className="navLi"> <Link to="/Services">Our Services</Link> </li>
+                <li className="navLi"> <Link to="/OurTeam">Our Team</Link> </li>
             </ul>
             <div>
                 <button className="btn py-1 px-5 rounded-lg border-solid border-2 mr-10 border-gray-700 hover:border-green-500 hover:text-green-500">Sign up</button>

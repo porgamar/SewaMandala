@@ -1,9 +1,12 @@
 import React from "react";
 import Navbar from "./pages/navbar";
 import Footer from "./pages/footer";
+
 import IndexPage from "./pages/home";
-import UserProfile from "./pages/profile";
+import Profile from "./pages/Profile";
 import ExplorePage from "./pages/Explore";
+import Services from "./pages/Services";
+import OurTeam from "./pages/OurTeam";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -15,10 +18,12 @@ function App() {
         <Routes>
           <Route path="/" element={<IndexPage />} />
           <Route path="/Explore" element={<ExplorePage />} />
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/OurTeam" element={<OurTeam />} />
+          <Route path="/Services" element={<Services />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
+        <Footer />
       </Router>
-      <Footer />
     </>
   )
 }

@@ -3,6 +3,9 @@ import Fb from "../assets/facebook.png";
 import Ln from "../assets/linkedin.png";
 import Ig from "../assets/instagram.png";
 import Twt from "../assets/twitter.png";
+import Call from "../assets/call.png";
+import Mail from "../assets/email.png";
+import Add from "../assets/location.png";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -15,16 +18,24 @@ function Footer() {
                         - physical and digital services, all in one reliable marketplace.</p>
                 </div>
 
-                <ul className="flex justify-center items-center px-5 ">
+                <ul className="flex justify-center  px-5 ">
                     <li className="fNavLi"> <p className="font-semibold pb-10">Quick Links </p>
                         <ul>
-                            <li className="fNavLink"> Home </li>
-                            <li className="fNavLink"> Explore </li>
-                            <li className="fNavLink"> Our Services </li>
-                            <li className="fNavLink"> Our team </li>
+                            <li className="fNavLink"> <Link to="/Home">Home </Link> </li>
+                            <li className="fNavLink"> <Link to="/Explore">Explore </Link></li>
+                            <li className="fNavLink"> <Link to="/Services">Our Services </Link></li>
+                            <li className="fNavLink"> <Link to="/OurTeam">Our team </Link></li>
                         </ul>
                     </li>
-                    <li className="fNavLi font-semibold"> Contact us</li>
+                    <li className="fNavLi "> <p className="pb-10 font-semibold">Contact us</p>
+                        <ul>
+                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Mail} className="max-w-4.5 "></img> support@sewamandala.com.np </li>
+                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Add} className="max-w-4.5 "></img> New-Baneshwor, Kathmandu</li>
+                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Call} className="max-w-4.5 "></img> +977-9860331669 , 9803422032 </li>
+                           
+                           
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
@@ -45,7 +56,7 @@ function Footer() {
                     </div>
                 </div>
                 <div>
-                    <p className="mx-6 mt-3 text-sm cursor-pointer text-gray-800"> ↑ Top</p>  {/* href to top of page left */}
+                    <p className="mx-6 mt-3 text-sm cursor-pointer text-gray-800"><a href="#"> ↑ Top </a></p>  {/* href to top of page left */}
                 </div>
             </div>
         </div>

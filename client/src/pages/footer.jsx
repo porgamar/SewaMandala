@@ -10,59 +10,68 @@ import { Link } from "react-router-dom";
 
 function Footer() {
     return (
-        <div className="flex-col justify-center items-center inset-shadow-sm px-50 pb-5">
-            <div className="flex justify-center items-center max-h-auto">
-                <div className="pb-10 max-w-125">
-                    <img src={Logo} alt="SewaMandala Logo" className="max-w-80"></img>
-                    <p className="mx-6 text-gray-700">Connecting clients with verified, trusted service providers across Nepal
-                        - physical and digital services, all in one reliable marketplace.</p>
+        <footer className="w-full px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-10 sm:pt-12 md:pt-14 pb-6 inset-shadow-sm">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8 md:gap-10 text-center md:text-left">
+
+                <div className="flex flex-col items-center md:items-start w-full md:w-2/5">
+                    <img src={Logo} alt="SewaMandala Logo" className="w-40 sm:w-48 md:w-56"></img>
+                    <p className="mt-3 text-sm sm:text-base text-gray-700 max-w-xs md:max-w-sm">
+                        Connecting clients with verified, trusted service providers across Nepal — physical and digital services, all in one reliable marketplace.
+                    </p>
                 </div>
 
-                <ul className="flex justify-center  px-5 ">
-                    <li className="fNavLi"> <p className="font-semibold pb-10">Quick Links </p>
-                        <ul>
-                            <li className="fNavLink"> <Link to="/Home">Home </Link> </li>
-                            <li className="fNavLink"> <Link to="/Explore">Explore </Link></li>
-                            <li className="fNavLink"> <Link to="/Services">Our Services </Link></li>
-                            <li className="fNavLink"> <Link to="/OurTeam">Our team </Link></li>
+                <div className="flex flex-col sm:flex-row w-full md:w-2/4 justify-center md:justify-between gap-8 sm:gap-10">
+
+                    {/* Quick links column */}
+                    <div className="flex flex-col items-center md:items-start">
+                        <p className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Quick Links</p>
+                        <ul className="flex flex-col gap-2 sm:gap-3">
+                            <li className="fNavLink text-sm sm:text-base"> <Link to="/Home">Home</Link> </li>
+                            <li className="fNavLink text-sm sm:text-base"> <Link to="/Explore">Explore</Link> </li>
+                            <li className="fNavLink text-sm sm:text-base"> <Link to="/Services">Our Services</Link> </li>
+                            <li className="fNavLink text-sm sm:text-base"> <Link to="/OurTeam">Our team</Link> </li>
                         </ul>
-                    </li>
-                    <li className="fNavLi "> <p className="pb-10 font-semibold">Contact us</p>
-                        <ul>
-                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Mail} className="max-w-4.5 "></img> support@sewamandala.com.np </li>
-                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Add} className="max-w-4.5 "></img> New-Baneshwor, Kathmandu</li>
-                            <li className="flex items-center gap-4 text-gray-600 text-sm mb-5"> <img src={Call} className="max-w-4.5 "></img> +977-9860331669 , 9803422032 </li>
-                           
-                           
+                    </div>
+
+                    <div className="flex flex-col items-center md:items-start">
+                        <p className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Contact us</p>
+                        <ul className="flex flex-col gap-3">
+                            <li className="flex items-center justify-center md:justify-start gap-3 text-gray-600 text-sm sm:text-base">
+                                <img src={Mail} className="w-4 sm:w-4.5 shrink-0"></img>
+                                <span>support@sewamandala.com.np</span>
+                            </li>
+                            <li className="flex items-center justify-center md:justify-start gap-3 text-gray-600 text-sm sm:text-base">
+                                <img src={Add} className="w-4 sm:w-4.5 shrink-0"></img>
+                                <span>New-Baneshwor, Kathmandu</span>
+                            </li>
+                            <li className="flex items-center justify-center md:justify-start gap-3 text-gray-600 text-sm sm:text-base">
+                                <img src={Call} className="w-4 sm:w-4.5 shrink-0"></img>
+                                <span>+977-9860331669, 9803422032</span>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
 
-            <div className=" flex justify-between items-center border-gray-400 border-solid border-t-2 ">
-                <p className="mx-6 mt-3 text-xs text-gray-600"> &copy; 2026 SewaMandala. All rights reserved.</p>
-                <div className="flex justify-between mt-3 ">
-                    <div className="fNavLogo">
-                        <img src={Fb} alt="Facebook" className="max-w-6  "></img>
-                    </div>
-                    <div className="fNavLogo">
-                        <img src={Ln} alt="Linkedin" className="max-w-6 "></img>
-                    </div>
-                    <div className="fNavLogo">
-                        <img src={Ig} alt="Facebook" className="max-w-6"></img>
-                    </div>
-                    <div className="fNavLogo">
-                        <img src={Twt} alt="Twitter" className="max-w-6"></img>
-                    </div>
+            <div className="max-w-6xl mx-auto mt-8 sm:mt-10 pt-4 border-t-2 border-gray-400 border-solid
+                flex flex-col sm:flex-row items-center justify-between gap-4">
+
+                <p className="text-xs sm:text-sm text-gray-600 order-2 sm:order-1">
+                    &copy; 2026 SewaMandala. All rights reserved.
+                </p>
+
+                <div className="flex items-center gap-4 sm:gap-5 order-1 sm:order-2">
+                    <img src={Fb} alt="Facebook" className="w-5 sm:w-6 hover:opacity-70 cursor-pointer"></img>
+                    <img src={Ln} alt="Linkedin" className="w-5 sm:w-6 hover:opacity-70 cursor-pointer"></img>
+                    <img src={Ig} alt="Instagram" className="w-5 sm:w-6 hover:opacity-70 cursor-pointer"></img>
+                    <img src={Twt} alt="Twitter" className="w-5 sm:w-6 hover:opacity-70 cursor-pointer"></img>
                 </div>
-                <div>
-                    <p className="mx-6 mt-3 text-sm cursor-pointer text-gray-800"><a href="#"> ↑ Top </a></p>  {/* href to top of page left */}
-                </div>
+
+                <a href="#" className="text-xs sm:text-sm text-gray-800 hover:text-green-600 order-3">
+                    ↑ Top
+                </a>
             </div>
-        </div>
-
-
-
+        </footer>
     )
 }
 

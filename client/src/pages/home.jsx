@@ -90,13 +90,17 @@ function IndexPage() {
     const [activeButton, setActiveButton] = useState('hiring')
     return (
         <>
-            <div className="relative w-full">
-                <img src={HeroImg} className="select-none w-full object-cover" alt="hero image" />
-                <div className="absolute inset-0 flex flex-col items-end justify-end sm:justify-center text-right px-4 sm:px-8 md:pr-20 lg:pr-32 py-8">
-                    <p className="mb-4 sm:mb-6 md:mb-10 max-w-[90%] sm:max-w-md md:max-w-2xl text-white font-display text-3xl sm:text-5xl md:text-7xl">
+            <div className="relative w-full min-h-[350px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[650px] overflow-hidden">
+                <img
+                    src={HeroImg}
+                    className="select-none absolute inset-0 w-full h-full object-cover"
+                    alt="hero image"
+                />
+                <div className="absolute inset-0 flex flex-col items-end justify-end sm:justify-center text-right px-4 sm:px-8 md:pr-20 lg:pr-32 py-6 sm:py-8">
+                    <p className="mb-3 sm:mb-6 md:mb-10 max-w-[90%] sm:max-w-md md:max-w-2xl text-white font-display text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight">
                         One Marketplace, Any Job, Any place
                     </p>
-                    <p className="mb-4 sm:mb-6 md:mb-10 max-w-[90%] sm:max-w-sm md:max-w-xl text-white font-poppins text-sm sm:text-base md:text-xl">
+                    <p className="mb-3 sm:mb-6 md:mb-10 max-w-[90%] sm:max-w-sm md:max-w-xl text-white font-poppins text-xs sm:text-base md:text-lg lg:text-xl">
                         Connect with trusted freelancers and local service providers for every task, big or small.
                     </p>
                     <form className="relative w-full max-w-[90%] sm:max-w-md md:max-w-2xl">
@@ -125,11 +129,10 @@ function IndexPage() {
                     {activeButton === 'finding' && <WOrkingContent />}
                 </div>
             </div>
-            <div className="mx-32 rounded-2xl flex flex-col mb-10 items-center bg-linear-to-r from-sky-600 to-green-400">
-                <p className="font-poppins text-3xl mt-10 text-center font-semibold text-white">
+            <div className="mx-4 sm:mx-8 md:mx-16 lg:mx-32 rounded-2xl flex flex-col mb-10 items-center bg-linear-to-r from-sky-600 to-green-400 px-4">
+                <p className="font-poppins text-xl sm:text-2xl md:text-3xl mt-8 sm:mt-10 text-center font-semibold text-white">
                     Explore a network of talented professionals ready to help.</p>
-
-                <Link to="/Explore"><button className="mb-10 mt-8 text-md bg-white py-1.5 px-10 rounded-lg hover:opacity-70">Explore talents</button></Link>
+                <Link to="/Explore"><button className="mb-8 sm:mb-10 mt-6 sm:mt-8 text-sm sm:text-md bg-white py-1.5 px-6 sm:px-10 rounded-lg hover:opacity-70">Explore talents</button></Link>
             </div>
 
         </>

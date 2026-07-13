@@ -38,5 +38,12 @@
     @apply p-2 mx-2 border-solid  rounded-full bg-zinc-100/0
 }
 .fNavLogo:hover{
-    @apply  bg-zinc-100/100 
+    @apply  bg-zinc-100
+}
+
+.hOptBtn{
+    @apply flex-1 py-1 text-sm font-semibold h-full 
+}
+.homeCard{
+    @apply font-poppins text-xl text-black pt-2 object-fill w-full
 }

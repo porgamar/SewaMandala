@@ -39,7 +39,7 @@ function Footer() {
                 </ul>
             </div>
 
-            <div className=" flex justify-between items-center border-solid border-gray-400 border-solid border-t-2 ">
+            <div className=" flex justify-between items-center border-gray-400 border-solid border-t-2 ">
                 <p className="mx-6 mt-3 text-xs text-gray-600"> &copy; 2026 SewaMandala. All rights reserved.</p>
                 <div className="flex justify-between mt-3 ">
                     <div className="fNavLogo">

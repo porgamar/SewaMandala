@@ -4,16 +4,118 @@
 
 @theme{
      --font-display: "Fjalla One", sans-serif;
-     --color-primary: #ffffff; 
+     --color-primary: #ffffff;
 }   
 @theme{
     --font-poppins: "Poppins", sans-serif;
     --color-primary: #ffffff;
 }
 
+/* Auth pages theme */
+:root {
+    --brand: #16a34a; /* green-600 */
+    --brand-2: #22c55e; /* green-500 */
+    --brand-dark: #15803d; /* green-700 */
+}
+
+.auth-page {
+    @apply min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-b from-gray-50 to-white px-4;
+}
+
+.auth-card {
+    @apply w-full max-w-md rounded-2xl bg-white shadow-lg border border-gray-200 p-6 sm:p-8;
+}
+
+.auth-card-wide {
+    @apply max-w-lg;
+}
+
+.auth-card h1 {
+    @apply font-display text-3xl text-gray-900 mb-1;
+}
+
+.subtitle {
+    @apply text-gray-600 mb-6;
+}
+
+.auth-form {
+    @apply flex flex-col gap-4;
+}
+
+.auth-form label {
+    @apply text-sm font-medium text-gray-700;
+}
+
+.auth-form input {
+    @apply w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20;
+}
+
+
+
+.auth-form button {
+    @apply mt-2 w-full rounded-lg bg-green-500 py-2.5 font-semibold text-white hover:bg-green-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed;
+}
+
+
+.error {
+    @apply rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-2 text-sm;
+}
+
+.auth-footer {
+    @apply mt-6 text-sm text-gray-600;
+}
+
+.auth-footer a {
+    @apply text-green-600 hover:underline font-semibold;
+}
+
+
+/* Register specific UI */
+.user-type-selector {
+    @apply flex flex-col gap-2;
+}
+
+.field-label {
+    @apply text-sm text-gray-700 font-medium;
+}
+
+.type-options {
+    @apply grid grid-cols-2 gap-3;
+}
+
+.type-card {
+    @apply relative cursor-pointer rounded-xl border border-gray-300 p-4 transition-all bg-white;
+}
+
+.type-card input {
+    @apply absolute opacity-0 pointer-events-none;
+}
+
+.type-card.selected {
+    @apply border-green-500/60 bg-green-500/10;
+}
+
+.type-card.selected .type-icon {
+    @apply bg-green-500 text-white;
+}
+
+
+.type-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 bg-gray-50 mb-3;
+}
+
+.type-label {
+    @apply block font-semibold text-gray-900;
+}
+
+.type-desc {
+    @apply block text-xs text-gray-600 mt-1;
+}
+
 .navLi {
     @apply mx-3 text-gray-600 rounded-md py-1 px-5;
 }
+
 
 .navLi:hover {
     @apply text-black bg-gray-200 transition ease-in;

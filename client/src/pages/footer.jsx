@@ -26,7 +26,7 @@ function Footer() {
                     <div className="flex flex-col items-center md:items-start">
                         <p className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Quick Links</p>
                         <ul className="flex flex-col gap-2 sm:gap-3">
-                            <li className="fNavLink text-sm sm:text-base"> <Link to="/Home">Home</Link> </li>
+                            <li className="fNavLink text-sm sm:text-base"> <Link to="/">Home</Link> </li>
                             <li className="fNavLink text-sm sm:text-base"> <Link to="/Explore">Explore</Link> </li>
                             <li className="fNavLink text-sm sm:text-base"> <Link to="/Services">Our Services</Link> </li>
                             <li className="fNavLink text-sm sm:text-base"> <Link to="/OurTeam">Our team</Link> </li>

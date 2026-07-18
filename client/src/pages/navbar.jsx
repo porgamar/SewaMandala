@@ -19,8 +19,18 @@ function Navbar() {
 
             {/* Desktop auth buttons */}
             <div className="hidden md:flex items-center gap-2 lg:gap-3">
-                <button className="btn text-sm md:text-sm lg:text-base py-1 px-3 md:px-4 lg:px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500">Sign up</button>
-                <button className="btn text-sm md:text-sm lg:text-base hover:bg-green-600 py-1.5 rounded-lg px-3 md:px-4 lg:px-5 bg-green-500 text-white">Log in</button>
+                <Link
+                    to="/register"
+                    className="btn text-sm md:text-sm lg:text-base py-1 px-3 md:px-4 lg:px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
+                >
+                    Sign up
+                </Link>
+                <Link
+                    to="/login"
+                    className="btn text-sm md:text-sm lg:text-base hover:bg-green-600 py-1.5 rounded-lg px-3 md:px-4 lg:px-5 bg-green-500 text-white text-center"
+                >
+                    Log in
+                </Link>
             </div>
 
             {/* Mobile hamburger button */}
@@ -62,8 +72,20 @@ function Navbar() {
                         <li className="navLi"> <Link to="/OurTeam" onClick={() => setMenuOpen(false)}>Our Team</Link> </li>
                     </ul>
                     <div className="flex flex-col gap-3 mt-4">
-                        <button className="btn text-sm sm:text-base py-2 px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500">Sign up</button>
-                        <button className="btn text-sm sm:text-base hover:bg-green-600 py-2 rounded-lg px-5 bg-green-500 text-white">Log in</button>
+                        <Link
+                            to="/register"
+                            className="btn text-sm sm:text-base py-2 px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Sign up
+                        </Link>
+                        <Link
+                            to="/login"
+                            className="btn text-sm sm:text-base hover:bg-green-600 py-2 rounded-lg px-5 bg-green-500 text-white text-center"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Log in
+                        </Link>
                     </div>
                 </div>
             </div>

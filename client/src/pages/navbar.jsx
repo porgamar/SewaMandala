@@ -1,9 +1,28 @@
 import Image from "../assets/sewa1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const { isAuthenticated, user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+        setProfileMenuOpen(false);
+        setMenuOpen(false);
+        navigate("/dashboard");
+    };
+
+    const handleLogout = () => {
+        logout();
+        setProfileMenuOpen(false);
+        setMenuOpen(false);
+        navigate("/login");
+    };
+
+    const displayName = user?.full_name || user?.name || user?.email || "Profile";
 
     return (
         <div className="relative z-10 flex justify-between items-center bg-white my-1 px-4 sm:px-6 md:px-10 lg:px-16 xl:mx-25">
@@ -17,20 +36,56 @@ function Navbar() {
                 <li className="navLi text-sm md:text-base lg:text-lg"> <Link to="/OurTeam">Our Team</Link> </li>
             </ul>
 
-            {/* Desktop auth buttons */}
+            {/* Desktop auth area */}
             <div className="hidden md:flex items-center gap-2 lg:gap-3">
-                <Link
-                    to="/register"
-                    className="btn text-sm md:text-sm lg:text-base py-1 px-3 md:px-4 lg:px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
-                >
-                    Sign up
-                </Link>
-                <Link
-                    to="/login"
-                    className="btn text-sm md:text-sm lg:text-base hover:bg-green-600 py-1.5 rounded-lg px-3 md:px-4 lg:px-5 bg-green-500 text-white text-center"
-                >
-                    Log in
-                </Link>
+                {isAuthenticated ? (
+                    <div className="relative">
+                        <button
+                            type="button"
+                            onClick={() => setProfileMenuOpen((prev) => !prev)}
+                            className="flex items-center gap-2 rounded-full border border-gray-200 bg-white p-1 shadow-sm"
+                            aria-label="Open profile menu"
+                        >
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-sm font-semibold text-white">
+                                {displayName.charAt(0).toUpperCase()}
+                            </div>
+                        </button>
+
+                        {profileMenuOpen && (
+                            <div className="absolute right-0 top-12 w-48 rounded-lg border border-gray-200 bg-white py-2 shadow-lg">
+                                <button
+                                    type="button"
+                                    onClick={handleProfileClick}
+                                    className="flex w-full items-center px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                    View profile
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleLogout}
+                                    className="flex w-full items-center px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <>
+                        <Link
+                            to="/register"
+                            className="btn text-sm md:text-sm lg:text-base py-1 px-3 md:px-4 lg:px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
+                        >
+                            Sign up
+                        </Link>
+                        <Link
+                            to="/login"
+                            className="btn text-sm md:text-sm lg:text-base hover:bg-green-600 py-1.5 rounded-lg px-3 md:px-4 lg:px-5 bg-green-500 text-white text-center"
+                        >
+                            Log in
+                        </Link>
+                    </>
+                )}
             </div>
 
             {/* Mobile hamburger button */}
@@ -72,20 +127,41 @@ function Navbar() {
                         <li className="navLi"> <Link to="/OurTeam" onClick={() => setMenuOpen(false)}>Our Team</Link> </li>
                     </ul>
                     <div className="flex flex-col gap-3 mt-4">
-                        <Link
-                            to="/register"
-                            className="btn text-sm sm:text-base py-2 px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Sign up
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="btn text-sm sm:text-base hover:bg-green-600 py-2 rounded-lg px-5 bg-green-500 text-white text-center"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Log in
-                        </Link>
+                        {isAuthenticated ? (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={handleProfileClick}
+                                    className="btn text-sm sm:text-base py-2 px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
+                                >
+                                    View profile
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleLogout}
+                                    className="btn text-sm sm:text-base hover:bg-red-600 py-2 rounded-lg px-5 bg-red-500 text-white text-center"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/register"
+                                    className="btn text-sm sm:text-base py-2 px-5 rounded-lg border-solid border-2 border-gray-700 hover:border-green-500 hover:text-green-500 text-center"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Sign up
+                                </Link>
+                                <Link
+                                    to="/login"
+                                    className="btn text-sm sm:text-base hover:bg-green-600 py-2 rounded-lg px-5 bg-green-500 text-white text-center"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Log in
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

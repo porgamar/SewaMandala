@@ -41,11 +41,17 @@ router.patch('/me', authMiddleware, async (req, res) => {
   try {
     const { bio, skills } = req.body;
 
+    // allow client to skip skills update by sending undefined
+    const hasBio = typeof bio !== 'undefined';
+    const hasSkills = typeof skills !== 'undefined';
+
+
     const validSkills = Array.isArray(skills)
       ? skills.map(String)
       : null;
 
     // skills column is TEXT[] in schema; ensure we always pass a TEXT[] (or null).
+    // If client sends null/undefined, keep existing skills.
     const result = await pool.query(
       `UPDATE profiles
        SET bio = COALESCE($1, bio),
@@ -54,6 +60,7 @@ router.patch('/me', authMiddleware, async (req, res) => {
        RETURNING bio, skills`,
       [bio, validSkills, req.userId]
     );
+
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Profile not found' });

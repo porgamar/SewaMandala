@@ -16,12 +16,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<IndexPage />} />
-          <Route path="/Explore" element={<ExplorePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
           <Route path="/profile" element={<UserProfile />} />
-        </Routes>
-        <Routes>
           <Route path="/client" element={<Client/>}/>
-          <Route path="/Talent" element={<Talent/>}/>
+          <Route path="/talent" element={<Talent/>}/>
         </Routes>
       </Router>
       <Footer />

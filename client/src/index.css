@@ -1,14 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
 @theme{
      --font-display: "Fjalla One", sans-serif;
-     --color-primary: #ffffff; 
+     --color-primary: #ffffff;
+}   
+@theme{
+    --font-poppins: "Poppins", sans-serif;
+    --color-primary: #ffffff;
+}
+
+/* Auth pages theme */
+:root {
+    --brand: #16a34a; /* green-600 */
+    --brand-2: #22c55e; /* green-500 */
+    --brand-dark: #15803d; /* green-700 */
+}
+
+.auth-page {
+    @apply min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-b from-gray-50 to-white px-4;
+}
+
+.auth-card {
+    @apply w-full max-w-md rounded-2xl bg-white shadow-lg border border-gray-200 p-6 sm:p-8;
+}
+
+.auth-card-wide {
+    @apply max-w-lg;
+}
+
+.auth-card h1 {
+    @apply font-display text-3xl text-gray-900 mb-1;
+}
+
+.subtitle {
+    @apply text-gray-600 mb-6;
+}
+
+.auth-form {
+    @apply flex flex-col gap-4;
+}
+
+.auth-form label {
+    @apply text-sm font-medium text-gray-700;
+}
+
+.auth-form input {
+    @apply w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/20;
+}
+
+
+
+.auth-form button {
+    @apply mt-2 w-full rounded-lg bg-green-500 py-2.5 font-semibold text-white hover:bg-green-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed;
+}
+
+
+.error {
+    @apply rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-2 text-sm;
+}
+
+.auth-footer {
+    @apply mt-6 text-sm text-gray-600;
+}
+
+.auth-footer a {
+    @apply text-green-600 hover:underline font-semibold;
+}
+
+
+/* Register specific UI */
+.user-type-selector {
+    @apply flex flex-col gap-2;
+}
+
+.field-label {
+    @apply text-sm text-gray-700 font-medium;
+}
+
+.type-options {
+    @apply grid grid-cols-2 gap-3;
+}
+
+.type-card {
+    @apply relative cursor-pointer rounded-xl border border-gray-300 p-4 transition-all bg-white;
+}
+
+.type-card input {
+    @apply absolute opacity-0 pointer-events-none;
+}
+
+.type-card.selected {
+    @apply border-green-500/60 bg-green-500/10;
+}
+
+.type-card.selected .type-icon {
+    @apply bg-green-500 text-white;
+}
+
+
+.type-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 bg-gray-50 mb-3;
+}
+
+.type-label {
+    @apply block font-semibold text-gray-900;
+}
+
+.type-desc {
+    @apply block text-xs text-gray-600 mt-1;
 }
 
 .navLi {
     @apply mx-3 text-gray-600 rounded-md py-1 px-5;
 }
+
 
 .navLi:hover {
     @apply text-black bg-gray-200 transition ease-in;
@@ -33,5 +140,325 @@
     @apply p-2 mx-2 border-solid  rounded-full bg-zinc-100/0
 }
 .fNavLogo:hover{
-    @apply  bg-zinc-100/100 
+    @apply  bg-zinc-100
 }
+
+.hOptBtn{
+    @apply flex-1 py-1 text-sm font-semibold h-full 
+}
+.homeCard{
+    @apply font-poppins text-xl text-black pt-2 object-fill w-full
+}
+
+/* Dashboard styles */
+.dashboard-page {
+    @apply min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 px-4 py-8;
+}
+
+.dashboard-card {
+    @apply mx-auto w-full max-w-7xl rounded-[2rem] border border-gray-200 bg-white/95 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)];
+}
+
+.dashboard-header {
+    @apply mb-8 flex flex-col gap-6 rounded-[1.5rem] border border-gray-200 bg-slate-50 p-6 shadow-sm md:flex-row md:items-center md:justify-between;
+}
+
+.dashboard-header h1 {
+    @apply text-3xl font-semibold text-slate-900;
+}
+
+.user-email {
+    @apply mt-1 text-sm text-slate-600;
+}
+
+.badge {
+    @apply inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700;
+}
+
+.stats-grid {
+    @apply grid gap-6 md:grid-cols-2 xl:grid-cols-4;
+}
+
+.stat-card {
+    @apply rounded-[1.25rem] border border-gray-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1;
+}
+
+.stat-icon {
+    @apply mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-green-50 text-2xl;
+}
+
+.stat-value {
+    @apply block text-3xl font-semibold text-slate-900;
+}
+
+.stat-label {
+    @apply mt-2 text-sm uppercase tracking-[0.16em] text-slate-500;
+}
+
+.profile-section {
+    @apply mt-10 rounded-[1.5rem] border border-gray-200 bg-slate-50 p-6 shadow-sm;
+}
+
+.profile-section h2 {
+    @apply mb-5 text-2xl font-semibold text-slate-900;
+}
+
+.details-list {
+    @apply grid gap-4 md:grid-cols-2;
+}
+
+.details-list dt {
+    @apply text-sm font-medium text-slate-600;
+}
+
+.details-list dd {
+    @apply mt-1 text-base font-semibold text-slate-900;
+}
+
+.bio-block {
+    @apply mt-8 rounded-3xl bg-white p-6 text-slate-700 shadow-sm;
+}
+
+.bio-block h3 {
+    @apply mb-3 text-xl font-semibold text-slate-900;
+}
+
+.logout-btn {
+    @apply inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition duration-200 ease-in-out hover:bg-slate-800;
+}
+
+.profile-grid {
+    @apply grid gap-8 xl:grid-cols-[390px_1fr];
+}
+
+.profile-summary-card,
+.profile-details-card {
+    @apply rounded-[1.5rem] border border-gray-200 bg-white p-6 shadow-sm;
+}
+
+.profile-avatar-row {
+@apply mb-6 flex flex-col lg:flex-row items-start lg:items-center gap-4;
+
+}
+
+
+@media (max-width: 640px) {
+    .profile-name {
+
+        @apply text-2xl;
+    }
+    .profile-avatar {
+        @apply h-16 w-16 text-2xl;
+    }
+
+    /* prevent email text from overflowing/leaking on small screens */
+    .profile-summary-card {
+        @apply overflow-hidden;
+    }
+    .profile-meta {
+        @apply flex-col items-start gap-2;
+    }
+}
+
+
+
+.profile-avatar {
+    @apply flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-green-500 text-3xl font-bold text-white shadow-lg;
+}
+
+.profile-label {
+    @apply text-sm uppercase tracking-[0.2em] text-slate-500;
+}
+
+.profile-name {
+    @apply text-3xl font-semibold text-slate-900;
+}
+
+.profile-handle {
+    @apply mt-1 text-sm font-medium text-slate-600;
+}
+
+.profile-meta {
+    @apply mb-6 flex flex-wrap items-center gap-3 min-w-0;
+}
+
+
+
+.badge-pill {
+    @apply rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700;
+}
+
+.meta-item {
+    @apply text-sm text-slate-500;
+}
+
+.profile-actions {
+    @apply mb-6 flex flex-wrap gap-3;
+}
+
+.action-btn {
+    @apply rounded-full px-4 py-2 text-sm font-semibold transition duration-200;
+}
+
+.action-primary {
+    @apply bg-slate-900 text-white hover:bg-slate-800;
+}
+
+.action-secondary {
+    @apply border border-slate-300 bg-white text-slate-700 hover:border-slate-400;
+}
+
+.profile-stats-row {
+    @apply mb-6 flex flex-wrap gap-4;
+}
+
+.profile-stat {
+    @apply min-w-[120px] rounded-3xl bg-slate-50 p-4 text-center;
+}
+
+.profile-stat .stat-number {
+    @apply text-2xl font-semibold text-slate-900;
+}
+
+.profile-stat .stat-label {
+    @apply mt-1 text-xs uppercase tracking-[0.2em] text-slate-500;
+}
+
+.rating-summary {
+    @apply mb-6 grid gap-6 md:grid-cols-[1fr_1.25fr];
+}
+
+.rating-score {
+    @apply text-5xl font-semibold text-slate-900;
+}
+
+.rating-stars {
+    @apply mt-3 flex gap-1 text-xl text-amber-500;
+}
+
+.star {
+    @apply text-slate-300;
+}
+
+.star.filled {
+    @apply text-amber-500;
+}
+
+.rating-text {
+    @apply mt-2 text-sm uppercase tracking-[0.24em] text-slate-500;
+}
+
+.rating-chart {
+    @apply flex items-center justify-center;
+}
+
+.rating-bar-group {
+    @apply w-full space-y-2;
+}
+
+.rating-bar-row {
+    @apply flex items-center gap-3 text-sm text-slate-600;
+}
+
+.rating-bar-bg {
+    @apply relative h-2 flex-1 overflow-hidden rounded-full bg-slate-100;
+}
+
+.rating-bar-fill {
+    @apply absolute inset-y-0 left-0 rounded-full bg-green-500;
+}
+
+.compact-grid {
+    @apply grid gap-4 grid-cols-1 md:grid-cols-2;
+}
+
+.review-card {
+    @apply rounded-[1.25rem] border border-gray-200 bg-slate-50 p-6;
+}
+
+.review-header {
+    @apply mb-4 flex items-center justify-between gap-3;
+}
+
+.review-title {
+    @apply text-lg font-semibold text-slate-900;
+}
+
+.review-badge {
+    @apply rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white;
+}
+
+.review-text {
+    @apply text-slate-700 leading-7;
+}
+
+.bio-block {
+    @apply rounded-3xl bg-slate-50 p-5 text-slate-700 shadow-sm;
+}
+
+.bio-block.editable-bio-block {
+    @apply bg-white border border-slate-200;
+}
+
+.bio-block h3 {
+    @apply mb-3 text-xl font-semibold text-slate-900;
+}
+
+.bio-header-row {
+    @apply mb-4 flex items-center justify-between gap-3;
+}
+
+.bio-status {
+    @apply text-sm font-medium text-slate-500;
+}
+
+.profile-description-input {
+    @apply min-h-[150px] w-full rounded-[1.25rem] border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-900 outline-none transition duration-200 focus:border-green-400 focus:bg-white;
+}
+
+.expertise-block {
+    @apply mt-6;
+}
+
+.expertise-block h3 {
+    @apply mb-4 text-xl font-semibold text-slate-900;
+}
+
+.expertise-tags {
+    @apply flex flex-wrap gap-3;
+}
+
+.expertise-tag {
+    @apply rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition duration-200 hover:border-slate-400 hover:bg-slate-50;
+}
+
+.expertise-tag.selected {
+    @apply border-transparent bg-slate-900 text-white shadow-lg;
+}
+
+.save-btn {
+    @apply bg-green-600 text-white hover:bg-green-700 active:scale-[0.99] disabled:bg-slate-300 disabled:text-slate-500;
+    pointer-events: auto;
+}
+
+.profile-summary-card {
+    @apply relative;
+}
+
+
+.save-status-row {
+    @apply mt-2;
+}
+
+.save-status-text {
+    @apply text-sm text-slate-500;
+}
+
+.error {
+    @apply rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-2 text-sm;
+}
+
+.loading-text {
+    @apply text-base text-slate-600;
+}
+

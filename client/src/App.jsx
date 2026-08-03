@@ -1,29 +1,95 @@
-// import React from "react";
 import Navbar from "./pages/navbar";
 import Footer from "./pages/footer";
+
 import IndexPage from "./pages/home";
 import UserProfile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
-import Client from "./pages/client_listing"
-import Talent from "./pages/talent_listing"
+import Client from "./pages/client_listing";
+import Talent from "./pages/talent_listing";
+import Services from "./pages/Services";
+import OurTeam from "./pages/OurTeam";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+function PublicOnlyRoute({ children }) {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="auth-page">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Router>
         <Navbar />
+
         <Routes>
           <Route path="/" element={<IndexPage />} />
+          <Route path="/home" element={<IndexPage />} />
+
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/client" element={<Client/>}/>
-          <Route path="/talent" element={<Talent/>}/>
+          <Route path="/client" element={<Client />} />
+          <Route path="/talent" element={<Talent />} />
+
+          <Route path="/services" element={<Services />} />
+          <Route path="/ourteam" element={<OurTeam />} />
+
+          <Route
+            path="/login"
+            element={
+              <PublicOnlyRoute>
+                <Login />
+              </PublicOnlyRoute>
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <PublicOnlyRoute>
+                <Register />
+              </PublicOnlyRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
+
+        <Footer />
       </Router>
-      <Footer />
-    </>
-  )
+    </AuthProvider>
+  );
 }
+
 export default App;

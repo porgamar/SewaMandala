@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Navbar from "./navbar";
-import Footer from "./footer";
 
 const SERVICES = [
   { title: "Home repairs", desc: "Plumbing, electrical, and general fix-it help at your doorstep.", type: "Physical" },
@@ -15,14 +13,13 @@ const SERVICES = [
 
 const FILTERS = ["All", "Physical", "Digital"];
 
-// FAQ questions — add more objects here any time, the list grows automatically
 const FAQS = [
   { question: "How do I book a service?", answer: "Browse services, pick a provider, and send a request. They'll confirm details before you're charged." },
   { question: "Is payment protected?", answer: "Yes — funds are held until the work is marked complete, then released to the provider." },
   { question: "Can I offer both physical and digital services?", answer: "Yes, providers can list as many service types as they want under one profile." },
 ];
 
-// A single service row — list style instead of a card
+
 function ServiceRow({ title, desc, type }) {
   const tagColor = type === "Physical" ? "bg-[#22C55E]" : "bg-[#4881E3]";
   return (
@@ -38,7 +35,6 @@ function ServiceRow({ title, desc, type }) {
   );
 }
 
-// A single FAQ row — click the question to expand/collapse the answer
 function FaqCard({ question, answer }) {
   const [open, setOpen] = useState(false);
   return (
@@ -65,7 +61,7 @@ function Services() {
 
   return (
     <div className="min-h-screen bg-white text-[#181818]">
-      <Navbar />
+      
 
       <header className="text-center px-6 py-16 border-b border-[#e5e5e5]">
         <p className="text-xs uppercase tracking-widest text-[#22C55E] mb-3">
@@ -143,7 +139,6 @@ function Services() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

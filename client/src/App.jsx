@@ -1,10 +1,11 @@
-import React from "react";
 import Navbar from "./pages/navbar";
 import Footer from "./pages/footer";
 
 import IndexPage from "./pages/home";
-import Profile from "./pages/profile";
+import UserProfile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
+import Client from "./pages/client_listing";
+import Talent from "./pages/talent_listing";
 import Services from "./pages/Services";
 import OurTeam from "./pages/OurTeam";
 import Chat from "./pages/Chat";
@@ -41,53 +42,66 @@ function PublicOnlyRoute({ children }) {
 
 function App() {
   return (
-    <>
-      <AuthProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<IndexPage />} />
-            <Route path="/home" element={<IndexPage />} />
-            <Route path="/Home" element={<IndexPage />} />
-
+    <AuthProvider>
+      <Router>
+        <Navbar />
+<Routes>
             <Route path="/Explore" element={<ExplorePage />} />
             <Route path="/OurTeam" element={<OurTeam />} />
             <Route path="/Services" element={<Services />} />
             
-            <Route path="/Chat" element={<Chat />} />
+            <Route
+    path="/chat"
+    element={
+        <ProtectedRoute>
+            <Chat />
+        </ProtectedRoute>
+    }
+/>
+        
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/home" element={<IndexPage />} />
 
-            <Route
-              path="/login"
-              element={
-                <PublicOnlyRoute>
-                  <Login />
-                </PublicOnlyRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicOnlyRoute>
-                  <Register />
-                </PublicOnlyRoute>
-              }
-            />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/client" element={<Client />} />
+          <Route path="/talent" element={<Talent />} />
 
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </Router>
-      </AuthProvider>
-    </>
+          <Route path="/services" element={<Services />} />
+          <Route path="/ourteam" element={<OurTeam />} />
+
+          <Route
+            path="/login"
+            element={
+              <PublicOnlyRoute>
+                <Login />
+              </PublicOnlyRoute>
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <PublicOnlyRoute>
+                <Register />
+              </PublicOnlyRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
-

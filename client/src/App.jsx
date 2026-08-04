@@ -7,13 +7,13 @@ import Profile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
 import Services from "./pages/Services";
 import OurTeam from "./pages/OurTeam";
+import Chat from "./pages/Chat";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -53,7 +53,8 @@ function App() {
             <Route path="/Explore" element={<ExplorePage />} />
             <Route path="/OurTeam" element={<OurTeam />} />
             <Route path="/Services" element={<Services />} />
-            <Route path="/Profile" element={<Profile />} />
+            
+            <Route path="/Chat" element={<Chat />} />
 
             <Route
               path="/login"

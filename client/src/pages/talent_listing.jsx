@@ -6,14 +6,15 @@ export default function Talent_list() {
     const [errors, setErrors] = useState({});
 
     const [formData, setFormData] = useState({
-    full_name: "",
-    title: "",
-    bio: "",
-    pricing_type: "Hourly",
-    rate: "",
-    availability: "Available",
-    skills: [],
-    image: null,
+   full_name: "",
+   title: "",
+   bio: "",
+   experience: "",
+   location: "",
+   availability: "Available",
+   hourly_rate: "",
+   skills: [],
+   image: null,
   });
  
   const addSkill = () => {
@@ -77,10 +78,10 @@ const removeSkill = (skillToRemove) => {
   }
 
   // Rate
-  if (!formData.rate) {
-    newErrors.rate = "Rate is required.";
-  } else if (Number(formData.rate) <= 0) {
-    newErrors.rate = "Rate must be greater than 0.";
+  if (!formData.hourly_rate) {
+    newErrors.hourly_rate = "Rate is required.";
+  } else if (Number(formData.hourly_rate) <= 0) {
+    newErrors.hourly_rate = "Rate must be greater than 0.";
   }
 
   // Skills
@@ -127,27 +128,40 @@ const handleSubmit = async (e) => {
   data.append("title", formData.title);
   data.append("bio", formData.bio);
   data.append("pricing_type", formData.pricing_type);
-  data.append("rate", formData.rate);
+  data.append("experience", formData.experience);
+  data.append("location", formData.location);
+  data.append("hourly_rate", formData.hourly_rate);
   data.append("availability", formData.availability);
 
   data.append("skills", JSON.stringify(formData.skills));
 
   data.append("image", formData.image);
 
-  try {
-    const response = await fetch("http://localhost:5000/api/talents", {
-      method: "POST",
-      body: data,
-    });
+ try {
+  const token = localStorage.getItem("token");
 
-    const result = await response.json();
+  const response = await fetch("http://localhost:5000/api/talents", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+  });
 
-    console.log(result);
-  } catch (error) {
-    console.error(error);
+  const result = await response.json();
+
+  if (!response.ok) {
+    alert(result.error);
+    return;
   }
-};
 
+  alert("Profile created successfully!");
+
+  console.log(result);
+} catch (error) {
+  console.error(error);
+  alert("Something went wrong.");
+}
   return (
     <div className="min-h-screen p-4 sm:p-6 md:p-8">
       <div className="max-w-5xl mx-auto">
@@ -256,29 +270,69 @@ const handleSubmit = async (e) => {
             </p>
             )}
           </div>
+           
+            <div>
+  <label className="block font-semibold mb-2">
+    Experience
+  </label>
+
+  <textarea
+    rows="3"
+    name="experience"
+    placeholder="Describe your experience"
+    className="w-full border rounded-md p-3 bg-white resize-none"
+    value={formData.experience}
+    onChange={handleChange}
+  />
+
+  {errors.experience && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.experience}
+    </p>
+  )}
+</div>
+
+<div>
+  <label className="block font-semibold mb-2">
+    Location
+  </label>
+
+  <input
+    type="text"
+    name="location"
+    placeholder="Kathmandu"
+    className="w-full border rounded-md p-3 bg-white"
+    value={formData.location}
+    onChange={handleChange}
+  />
+
+  {errors.location && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.location}
+    </p>
+  )}
+</div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">
-                <select name="pricing_type"
-                 value={formData.pricing_type}
-                  onChange={handleChange}>
-                <option>Hourly</option>
-                <option>work based</option>
-              
-              </select>
-              </label>
+             <label className="block font-semibold mb-2">
+             Hourly Rate
+            </label>
 
-              <input
-                type="number" name="rate" placeholder="60" className="w-full border rounded-md p-3 bg-white"
-                 value={formData.rate}
-                 onChange={handleChange}
-              />
-              {errors.rate && (
-              <p className="text-red-500 text-sm mt-1">
-              {errors.rate}
-              </p>
-              )}
+<input
+  type="number"
+  name="hourly_rate"
+  placeholder="60"
+  className="w-full border rounded-md p-3 bg-white"
+  value={formData.hourly_rate}
+  onChange={handleChange}
+/>
+
+{errors.hourly_rate && (
+  <p className="text-red-500 text-sm mt-1">
+    {errors.hourly_rate}
+  </p>
+)}
             </div>
 
             <div>
@@ -352,4 +406,4 @@ const handleSubmit = async (e) => {
       </div>
     </div>
   );
-}
+} }

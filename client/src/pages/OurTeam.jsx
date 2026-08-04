@@ -139,7 +139,11 @@ function OurTeam() {
   const [selected, setSelected] = useState(null);
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-white text-black">
+=======
+    <div className="min-h-screen bg-[#16151f] text-[#f1ede4]">
+>>>>>>> 1fbff0eac64b60ae59b3bb7c66cd75b54cfdd021
 
       <header className="text-center px-6 py-20 border-b border-black/10">
         <p className="text-xs uppercase tracking-widest text-[#22C55E] mb-3">
@@ -233,6 +237,7 @@ function OurTeam() {
           ))}
         </div>
       </section>
+<<<<<<< HEAD
 
       {/* Contact — visitor submits, org receives it via email */}
       <section id="contact" className="px-6 py-20">
@@ -246,6 +251,9 @@ function OurTeam() {
         <ContactForm />
       </section>
 
+=======
+ 
+>>>>>>> 1fbff0eac64b60ae59b3bb7c66cd75b54cfdd021
     </div>
   );
 }

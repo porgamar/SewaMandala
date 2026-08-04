@@ -65,7 +65,7 @@ function Services() {
 
   return (
     <div className="min-h-screen bg-white text-[#181818]">
-      <Navbar />
+      
 
       <header className="text-center px-6 py-16 border-b border-[#e5e5e5]">
         <p className="text-xs uppercase tracking-widest text-[#22C55E] mb-3">
@@ -142,8 +142,6 @@ function Services() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

@@ -21,7 +21,6 @@ function OurTeam() {
 
   return (
     <div className="min-h-screen bg-[#16151f] text-[#f1ede4]">
-      <Navbar />
 
       <header className="text-center px-6 py-20 border-b border-white/10">
         <p className="text-xs uppercase tracking-widest text-[#22C55E] mb-3">
@@ -115,8 +114,7 @@ function OurTeam() {
           ))}
         </div>
       </section>
-
-      <Footer />
+ 
     </div>
   );
 }

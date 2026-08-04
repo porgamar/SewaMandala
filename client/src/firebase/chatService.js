@@ -5,6 +5,8 @@ import {
   orderBy,
   onSnapshot,
   serverTimestamp,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 
 import { db } from "./firebase";
@@ -24,6 +26,7 @@ export function getRoomId(user1, user2) {
 export async function sendMessage(senderId, receiverId, text) {
   const roomId = getRoomId(senderId, receiverId);
 
+  // Save the message
   await addDoc(
     collection(db, "chats", roomId, "messages"),
     {
@@ -33,6 +36,17 @@ export async function sendMessage(senderId, receiverId, text) {
       createdAt: serverTimestamp(),
       seen: false,
     }
+  );
+
+  // Update the chat document
+  await setDoc(
+    doc(db, "chats", roomId),
+    {
+      participants: [senderId, receiverId],
+      lastMessage: text,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
   );
 }
 
@@ -61,4 +75,19 @@ export function subscribeToMessages(senderId, receiverId, callback) {
     console.error("Firestore listener error:", error);
   }
 );
+}
+export function subscribeToChats(callback) {
+  const q = query(
+    collection(db, "chats"),
+    orderBy("updatedAt", "desc")
+  );
+
+  return onSnapshot(q, (snapshot) => {
+    const chats = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    callback(chats);
+  });
 }

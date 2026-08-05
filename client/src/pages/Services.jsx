@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Navbar from "./navbar";
-import Footer from "./footer";
 
 const SERVICES = [
   { title: "Home repairs", desc: "Plumbing, electrical, and general fix-it help at your doorstep.", type: "Physical" },
@@ -140,6 +138,8 @@ function Services() {
           </div>
         </div>
       </section>
+
+     
     </div>
   );
 }

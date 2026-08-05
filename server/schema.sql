@@ -1,7 +1,3 @@
-CREATE DATABASE auth_db;
-
-\c auth_db;
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
@@ -36,3 +32,13 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER after_user_insert
 AFTER INSERT ON users
 FOR EACH ROW EXECUTE FUNCTION create_profile();
+
+-- Contact form submissions
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);

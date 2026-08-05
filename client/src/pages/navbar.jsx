@@ -34,6 +34,11 @@ function Navbar() {
                 <li className="navLi text-sm md:text-base lg:text-lg"> <Link to="/Explore">Explore</Link> </li>
                 <li className="navLi text-sm md:text-base lg:text-lg"> <Link to="/Services">Our Services</Link> </li>
                 <li className="navLi text-sm md:text-base lg:text-lg"> <Link to="/OurTeam">Our Team</Link> </li>
+             {isAuthenticated && (
+        <li className="navLi text-sm md:text-base lg:text-lg">
+            <Link to="/chat">Chat</Link>
+        </li>
+    )}
             </ul>
 
             {/* Desktop auth area */}
@@ -125,6 +130,13 @@ function Navbar() {
                         <li className="navLi"> <Link to="/Explore" onClick={() => setMenuOpen(false)}>Explore</Link> </li>
                         <li className="navLi"> <Link to="/Services" onClick={() => setMenuOpen(false)}>Our Services</Link> </li>
                         <li className="navLi"> <Link to="/OurTeam" onClick={() => setMenuOpen(false)}>Our Team</Link> </li>
+                        {isAuthenticated && (
+        <li className="navLi">
+            <Link to="/chat" onClick={() => setMenuOpen(false)}>
+                Chat
+            </Link>
+        </li>
+    )}
                     </ul>
                     <div className="flex flex-col gap-3 mt-4">
                         {isAuthenticated ? (

@@ -10,6 +10,6 @@ const {
 
 router.get("/", getTalents);
 
-router.post("/", upload.single("image"), createTalent);
+router.post("/", auth, upload.single("image"), createTalent);
 
 module.exports = router;

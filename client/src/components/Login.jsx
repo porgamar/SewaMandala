@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { API_BASE } from '../config';
 
-
+const ADMIN_EMAIL = 'admin@sewamandala.com';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -22,7 +22,8 @@ export default function Login() {
     try {
       const { data } = await axios.post(`${API_BASE}/auth/login`, { email, password });
       login(data.user, data.token);
-      navigate('/dashboard');
+      console.log('Logged in as:', data.user.email);
+      navigate(data.user.email === ADMIN_EMAIL ? '/admin' : '/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     } finally {

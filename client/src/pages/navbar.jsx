@@ -9,6 +9,8 @@ function Navbar() {
     const { isAuthenticated, user, logout } = useAuth();
     const navigate = useNavigate();
 
+    const isAdmin = user?.email === "admin@sewamandala.com";
+
     const handleProfileClick = () => {
         setProfileMenuOpen(false);
         setMenuOpen(false);
@@ -37,6 +39,11 @@ function Navbar() {
              {isAuthenticated && (
         <li className="navLi text-sm md:text-base lg:text-lg">
             <Link to="/chat">Chat</Link>
+        </li>
+    )}
+             {isAdmin && (
+        <li className="navLi text-sm md:text-base lg:text-lg">
+            <Link to="/admin">Admin</Link>
         </li>
     )}
             </ul>
@@ -134,6 +141,13 @@ function Navbar() {
         <li className="navLi">
             <Link to="/chat" onClick={() => setMenuOpen(false)}>
                 Chat
+            </Link>
+        </li>
+    )}
+                        {isAdmin && (
+        <li className="navLi">
+            <Link to="/admin" onClick={() => setMenuOpen(false)}>
+                Admin
             </Link>
         </li>
     )}

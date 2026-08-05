@@ -9,6 +9,7 @@ import Talent from "./pages/talent_listing";
 import Services from "./pages/Services";
 import OurTeam from "./pages/OurTeam";
 import Chat from "./pages/Chat";
+import AdminPanel from "./pages/AdminPanel";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
@@ -20,10 +21,13 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 
+const ADMIN_EMAIL = "admin@sewamandala.com";
+
 function PublicOnlyRoute({ children }) {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, loading, user } = useAuth();
 
   if (loading) {
     return (
@@ -34,17 +38,37 @@ function PublicOnlyRoute({ children }) {
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
+    return (
+      <Navigate to={user?.email === ADMIN_EMAIL ? "/admin" : "/home"} replace />
+    );
   }
 
   return children;
+}
+
+// Admin panel is a standalone page — no site Navbar/Footer around it.
+function SiteChrome({ children }) {
+  const location = useLocation();
+  const isAdminPage = location.pathname.toLowerCase() === "/admin";
+
+  if (isAdminPage) {
+    return children;
+  }
+
+  return (
+    <>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
 }
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
+        <SiteChrome>
 <Routes>
             <Route path="/Explore" element={<ExplorePage />} />
             <Route path="/OurTeam" element={<OurTeam />} />
@@ -96,9 +120,17 @@ function App() {
               </ProtectedRoute>
             }
           />
-        </Routes>
 
-        <Footer />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPanel />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        </SiteChrome>
       </Router>
     </AuthProvider>
   );

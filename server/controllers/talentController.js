@@ -33,7 +33,7 @@ const createTalent = async (req, res) => {
 
   try {
     const userId = req.userId;
-
+    
     const {
       full_name,
       title,
@@ -44,6 +44,16 @@ const createTalent = async (req, res) => {
       hourly_rate,
       skills
     } = req.body;
+
+    let parsedSkills = [];
+
+try {
+  parsedSkills = JSON.parse(skills);
+} catch {
+  return res.status(400).json({
+    error: "Invalid skills format."
+  });
+}
 
     const image = req.file ? req.file.filename : null;
 
@@ -76,7 +86,7 @@ if (
   });
 }
 
-if (!skills || skills.length === 0) {
+if (parsedSkills.length === 0) {
   return res.status(400).json({
     error: "At least one skill is required."
   });
@@ -115,7 +125,7 @@ if (!skills || skills.length === 0) {
         availability,
         hourly_rate
       )
-      VALUES ($1,$2,$3,$4,$5)
+      VALUES ($1,$2,$3)
       ON CONFLICT (user_id)
       DO UPDATE
       SET
@@ -135,8 +145,8 @@ if (!skills || skills.length === 0) {
       [userId]
     );
 
-    if (skills && skills.length > 0) {
-      for (const skill of skills) {
+    if (parsedSkills.length > 0) {
+      for (const skill of parsedSkills) {
 
         const skillResult = await client.query(
           `

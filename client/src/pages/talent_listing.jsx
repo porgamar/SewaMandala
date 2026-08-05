@@ -162,6 +162,7 @@ const handleSubmit = async (e) => {
   console.error(error);
   alert("Something went wrong.");
 }
+};
   return (
     <div className="min-h-screen p-4 sm:p-6 md:p-8">
       <div className="max-w-5xl mx-auto">
@@ -174,9 +175,9 @@ const handleSubmit = async (e) => {
 
         <form className="space-y-6"  onSubmit={handleSubmit}>
           <div>
-            <label className="block font-semibold mb-2">
+            <h3 className="block font-semibold mb-2">
               Profile Image
-            </label>
+            </h3>
 
             <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 border rounded-lg flex items-center justify-center overflow-hidden">
              {formData.image ? (
@@ -221,12 +222,12 @@ const handleSubmit = async (e) => {
           
 
           <div>
-            <label className="block font-semibold mb-2">
+            <label htmlFor="full_name" className="block font-semibold mb-2">
               Full Name
             </label>
 
             <input
-              type="text" placeholder="bikash" name="full_name" className="w-full border rounded-md p-3 bg-white"
+              type="text" placeholder="bikash" id="full_name" name="full_name" className="w-full border rounded-md p-3 bg-white"
                value={formData.full_name}
                onChange={handleChange}
             />
@@ -238,12 +239,12 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">
+            <label htmlFor="title" className="block font-semibold mb-2">
               Title
             </label>
 
             <input
-              type="text" placeholder="Frontend Developer" name="title" className="w-full border rounded-md p-3 bg-white"
+              type="text" placeholder="Frontend Developer" name="title" id="title" className="w-full border rounded-md p-3 bg-white"
                value={formData.title}
                onChange={handleChange}
             />
@@ -255,12 +256,12 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">
+            <label htmlFor="bio" className="block font-semibold mb-2">
               Bio
             </label>
 
             <textarea
-              rows="5" name="bio" placeholder="A couple of sentences about how you work." className="w-full border rounded-md p-3 bg-white resize-none"
+              rows="5" name="bio" id= "bio" placeholder="A couple of sentences about how you work." className="w-full border rounded-md p-3 bg-white resize-none"
              value={formData.bio}
              onChange={handleChange}
             />
@@ -272,13 +273,14 @@ const handleSubmit = async (e) => {
           </div>
            
             <div>
-  <label className="block font-semibold mb-2">
+  <label htmlFor="experience" className="block font-semibold mb-2">
     Experience
   </label>
 
   <textarea
     rows="3"
     name="experience"
+    id="experience"
     placeholder="Describe your experience"
     className="w-full border rounded-md p-3 bg-white resize-none"
     value={formData.experience}
@@ -293,13 +295,14 @@ const handleSubmit = async (e) => {
 </div>
 
 <div>
-  <label className="block font-semibold mb-2">
+  <label htmlFor="location" className="block font-semibold mb-2">
     Location
   </label>
 
   <input
     type="text"
     name="location"
+    id="location"
     placeholder="Kathmandu"
     className="w-full border rounded-md p-3 bg-white"
     value={formData.location}
@@ -315,13 +318,14 @@ const handleSubmit = async (e) => {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-             <label className="block font-semibold mb-2">
+             <label htmlFor="hourly_rate" className="block font-semibold mb-2">
              Hourly Rate
             </label>
 
 <input
   type="number"
   name="hourly_rate"
+  id="hourly_rate"
   placeholder="60"
   className="w-full border rounded-md p-3 bg-white"
   value={formData.hourly_rate}
@@ -336,11 +340,11 @@ const handleSubmit = async (e) => {
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">
+              <label htmlFor="availability" className="block font-semibold mb-2">
                 Availability
               </label>
 
-              <select name="availability" className="w-full border rounded-md p-3 bg-white"
+              <select id="availability" name="availability" className="w-full border rounded-md p-3 bg-white"
                value={formData.availability}
                onChange={handleChange}
               >
@@ -353,13 +357,13 @@ const handleSubmit = async (e) => {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">
+            <label  htmlFor="skillInput" className="block font-semibold mb-2">
               Skills
             </label>
 
             <div className="flex flex-col sm:flex-row gap-2">
               <input
-                type="text" placeholder="Add a skill and press Enter" className="flex-1 border rounded-md p-3 bg-white"
+                type="text" placeholder="Add a skill and press Enter" name="skillInput" id="skillInput" className="flex-1 border rounded-md p-3 bg-white"
                   value={skillInput}
                  onChange={(e) => setSkillInput(e.target.value)}
               />
@@ -406,4 +410,4 @@ const handleSubmit = async (e) => {
       </div>
     </div>
   );
-} }
+} 

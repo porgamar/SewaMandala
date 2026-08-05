@@ -10,6 +10,7 @@ import {
 import { subscribeToChats } from "../firebase/chatService";
 import ChatSidebar from "../components/chat/ChatSidebar";
 import ChatWindow from "../components/chat/ChatWindow";
+import NewChatModal from "../components/chat/NewChatModal";
 
 export default function Chat() {
   const { token, user } = useAuth();
@@ -18,40 +19,56 @@ export default function Chat() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chats, setChats] = useState([]);
+  const [showNewChat, setShowNewChat] = useState(false);
 
-  useEffect(() => {
-    async function loadUsers() {
-      try {
-        const { data } = await axios.get(`${API_BASE}/users`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+ 
 
-        setUsers(data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+ useEffect(() => {
+  if (!user || !token) return;
 
-    if (token) {
-      loadUsers();
-    }
-  }, [token]);
-
-  useEffect(() => {
-  if (!user) return;
-
-  const unsubscribe = subscribeToChats((allChats) => {
+  const unsubscribe = subscribeToChats(async (allChats) => {
+    // Only chats that belong to me
     const myChats = allChats.filter((chat) =>
       chat.participants?.includes(user.id)
     );
 
     setChats(myChats);
+
+    // Get the ID of the other participant in each chat
+    const otherUserIds = myChats.map((chat) =>
+      chat.participants.find((id) => id !== user.id)
+    );
+
+    // Remove duplicates
+    const uniqueIds = [...new Set(otherUserIds)];
+
+    // If I have no chats, empty the sidebar
+    if (uniqueIds.length === 0) {
+      setUsers([]);
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        `${API_BASE}/users/by-ids`,
+        {
+          ids: uniqueIds,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setUsers(data);
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   return () => unsubscribe();
-}, [user]);
+}, [user, token]);
 
   useEffect(() => {
     if (!selectedUser || !user) return;
@@ -77,6 +94,8 @@ export default function Chat() {
       users={users}
       selectedUser={selectedUser}
       setSelectedUser={setSelectedUser}
+        onNewChat={() => setShowNewChat(true)}
+
     />
 
       <ChatWindow
@@ -91,6 +110,14 @@ export default function Chat() {
     } catch (err) {
       console.error(err);
     }
+  }}
+/>
+
+    <NewChatModal
+  open={showNewChat}
+  onClose={() => setShowNewChat(false)}
+  onSelectUser={(user) => {
+    setSelectedUser(user);
   }}
 />
 </div>

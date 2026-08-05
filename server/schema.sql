@@ -76,3 +76,10 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 FOR EACH ROW
 EXECUTE FUNCTION create_profile();
+
+ALTER TABLE profiles ADD COLUMN skills JSONB DEFAULT '[]'::jsonb;
+
+-- add_talent_filters.sql
+ALTER TABLE talent ADD COLUMN category VARCHAR(100);
+ALTER TABLE talent ADD COLUMN delivery_time VARCHAR(20) DEFAULT 'anytime'
+  CHECK (delivery_time IN ('express', 'upto7', 'upto3', 'anytime'));

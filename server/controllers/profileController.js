@@ -80,8 +80,8 @@ const updateProfile = async (req, res) => {
         .filter(Boolean);
 
       await pool.query(
-        `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
-        [userId, cleaned]
+        'UPDATE profiles SET skills = $2 WHERE user_id = $1,'
+        [userId, JSON.stringify(cleaned)]  // stringify for jsonb
       );
     }
 

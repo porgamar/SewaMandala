@@ -6,6 +6,8 @@ const path = require("path");
 const usersRoutes = require("./routes/users");
 const talentRoutes = require("./routes/talentRoutes");
 const authRoutes = require('./routes/auth');
+// const profileRoutes = require('./routes/profile');
+const contactRoutes = require('./routes/contact');
 const profileRoutes = require('./routes/profileRoutes');
 
 const app = express();
@@ -23,6 +25,7 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/contact', contactRoutes);
 app.use("/api/users", usersRoutes);
 app.use('/api/profileRoutes', profileRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

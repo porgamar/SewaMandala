@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const path = require("path");
 
+const usersRoutes = require("./routes/users");
 const talentRoutes = require("./routes/talentRoutes");
 const authRoutes = require('./routes/auth');
+// const profileRoutes = require('./routes/profile');
+const contactRoutes = require('./routes/contact');
 const profileRoutes = require('./routes/profileRoutes');
 
 const app = express();
@@ -15,11 +18,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/contact', contactRoutes);
+app.use("/api/users", usersRoutes);
 app.use('/api/profileRoutes', profileRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

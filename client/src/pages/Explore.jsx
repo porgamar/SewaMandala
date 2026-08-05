@@ -1,6 +1,5 @@
 
-import Navbar from "./navbar"; 
-import React, { useState } from "react";
+import { useState } from "react";
 
 const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
@@ -142,7 +141,7 @@ function ExplorePage() {
   const clearAll = () => setFilters(DEFAULT_FILTERS);
 
   return (
-    <div className="flex justify-between my-15 border border-black w-full gap-8">
+    <div className="flex justify-between my-15 w-full gap-8">
       <div className="border ml-20 my-15 border-gray-200 rounded-2xl shadow-sm gap-2 w-1/5 max-w-xs p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

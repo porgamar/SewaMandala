@@ -7,13 +7,13 @@ import Client from "./pages/client_listing";
 import Talent from "./pages/talent_listing";
 import Services from "./pages/Services";
 import OurTeam from "./pages/OurTeam";
+import Chat from "./pages/Chat";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -44,8 +44,20 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-
-        <Routes>
+<Routes>
+            <Route path="/Explore" element={<ExplorePage />} />
+            <Route path="/OurTeam" element={<OurTeam />} />
+            <Route path="/Services" element={<Services />} />
+            
+            <Route
+    path="/chat"
+    element={
+        <ProtectedRoute>
+            <Chat />
+        </ProtectedRoute>
+    }
+/>
+        
           <Route path="/" element={<IndexPage />} />
           <Route path="/home" element={<IndexPage />} />
 

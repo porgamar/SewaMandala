@@ -14,7 +14,7 @@ const STATS = [
   { num: "0", label: "Departments in active service" },
 ];
 
-// Your Express API
+//Express API
 const API_BASE = "http://localhost:5000";
 
 function ContactForm() {
@@ -172,7 +172,7 @@ function OurTeam() {
         </p>
       </header>
 
-      {/* Founders — alternating-side timeline */}
+     
       <section id="structure" className="px-6 py-20 border-b border-black/10">
         <div className="text-center mb-14">
           <p className="text-xs uppercase tracking-widest text-[#e8944a] mb-2">Organization Members</p>
@@ -180,7 +180,7 @@ function OurTeam() {
         </div>
 
         <div className="relative max-w-2xl mx-auto">
-          {/* center spine */}
+          
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-black/10 -translate-x-1/2" />
 
           <div className="flex flex-col gap-10">
@@ -194,7 +194,7 @@ function OurTeam() {
                   key={founder.name}
                   className={`relative flex items-center ${onLeft ? "justify-start" : "justify-end"}`}
                 >
-                  {/* node on the spine */}
+                  
                   <div
                     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
                     style={{ backgroundColor: color }}
@@ -253,7 +253,7 @@ function OurTeam() {
         </div>
       </section>
 
-      {/* Contact — visitor submits, org receives it via email */}
+      {/* Contact — visitor submits*/}
       <section id="contact" className="px-6 py-20">
         <div className="text-center mb-10">
           <p className="text-xs uppercase tracking-widest text-[#a63446] mb-2">Get in touch</p>

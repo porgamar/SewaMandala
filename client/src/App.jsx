@@ -8,6 +8,7 @@ import Services from "./pages/Services";
 import OurTeam from "./pages/OurTeam";
 import Chat from "./pages/Chat";
 import AdminPanel from "./pages/AdminPanel";
+import StickyButton from "./components/StickyButton";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
@@ -16,6 +17,8 @@ import Dashboard from "./components/Dashboard";
 import AvailableWork from "./components/AvailableWork";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CurrentWork from "./components/CurrentWork";
+import TalentOnlyRoute from "./components/TalentOnlyRoute";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -46,7 +49,6 @@ function PublicOnlyRoute({ children }) {
   return children;
 }
 
-// Admin panel is a standalone page — no site Navbar/Footer around it.
 function SiteChrome({ children }) {
   const location = useLocation();
   const isAdminPage = location.pathname.toLowerCase() === "/admin";
@@ -57,9 +59,7 @@ function SiteChrome({ children }) {
 
   return (
     <>
-      <Navbar />
       {children}
-      <Footer />
     </>
   );
 }
@@ -69,68 +69,84 @@ function App() {
     <AuthProvider>
       <Router>
         <SiteChrome>
-<Routes>
-            <Route path="/Explore" element={<ExplorePage />} />
-            <Route path="/OurTeam" element={<OurTeam />} />
-            <Route path="/Services" element={<Services />} />
-            
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/home" element={<IndexPage />} />
+
+            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/ourteam" element={<OurTeam />} />
+            <Route path="/services" element={<Services />} />
+
+            <Route path="/client" element={<Client />} />
+            <Route path="/available-work" element={<AvailableWork />} />
+
             <Route
-    path="/chat/:jobId"
-    element={
-        <ProtectedRoute>
-            <Chat />
-        </ProtectedRoute>
-    }
-/>
-        
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/home" element={<IndexPage />} />
+              path="/current-work"
+              element={
+                <ProtectedRoute>
+                  <CurrentWork />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/client" element={<Client />} />
-          <Route path="/talent" element={<Talent />} />
-          <Route path="/available-work" element={<AvailableWork/>}/>
-          <Route path="/current-work"element={<ProtectedRoute><CurrentWork /></ProtectedRoute>}/>
-          <Route path="/services" element={<Services />} />
-          <Route path="/ourteam" element={<OurTeam />} />
+            <Route
+              path="/talent"
+              element={
+                <TalentOnlyRoute>
+                  <Talent />
+                </TalentOnlyRoute>
+              }
+            />
 
-          <Route
-            path="/login"
-            element={
-              <PublicOnlyRoute>
-                <Login />
-              </PublicOnlyRoute>
-            }
-          />
+            <Route
+              path="/chat/:jobId"
+              element={
+                <ProtectedRoute>
+                  <Chat />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/register"
-            element={
-              <PublicOnlyRoute>
-                <Register />
-              </PublicOnlyRoute>
-            }
-          />
+            <Route
+              path="/login"
+              element={
+                <PublicOnlyRoute>
+                  <Login />
+                </PublicOnlyRoute>
+              }
+            />
 
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/register"
+              element={
+                <PublicOnlyRoute>
+                  <Register />
+                </PublicOnlyRoute>
+              }
+            />
 
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <AdminPanel />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminPanel />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
         </SiteChrome>
+        <StickyButton />
+        <Footer />
       </Router>
     </AuthProvider>
   );

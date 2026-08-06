@@ -59,7 +59,7 @@ const updateProfile = async (req, res) => {
     const userId = req.userId;
     const { bio, skills } = req.body;
 
-    // Update the bio (and optionally fields) on the profiles table
+    // Update the bio
     const profileUpdate = await pool.query(
       `
       UPDATE profiles
@@ -71,26 +71,32 @@ const updateProfile = async (req, res) => {
     );
 
     if (profileUpdate.rows.length === 0) {
-      return res.status(404).json({ error: "Profile not found." });
+      return res.status(404).json({
+        error: "Profile not found.",
+      });
     }
 
-    //If skills were provided, replace the user's skills array
+    // Replace skills if provided
     if (Array.isArray(skills)) {
       const cleaned = skills
         .map((s) => (typeof s === "string" ? s.trim() : ""))
         .filter(Boolean);
 
-     await pool.query(
-     `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
-     [userId, JSON.stringify(cleaned)]
+      await pool.query(
+        `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
+        [userId, JSON.stringify(cleaned)]
       );
+    }
 
     // Return the updated profile
     const updated = await getProfileByUserId(userId);
     res.json(updated);
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server error." });
+    res.status(500).json({
+      error: "Server error.",
+    });
   }
 };
 

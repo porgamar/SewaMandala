@@ -1,14 +1,12 @@
 
 import Navbar from "./navbar";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import AvailableWork from "../components/AvailableWork";
 
 const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
-
-const LISTINGS = {
-
-}
 
 const DEFAULT_FILTERS = {
   category: "All Categories",
@@ -34,6 +32,7 @@ function BudgetSlider({ min, max, value, onChange, disabled }) {
     const next = Math.max(Number(e.target.value), minVal + 1);
     onChange([minVal, next]);
   };
+
 
   return (
     <div className={`relative w-full ${disabled ? "opacity-40 pointer-events-none" : ""}`}>
@@ -100,6 +99,7 @@ function ExplorePage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCard, setShowCard] = useState(false);
+  const { user } = useAuth();
 
 
   useEffect(() => {
@@ -177,6 +177,10 @@ function ExplorePage() {
   };
 
   const clearAll = () => setFilters(DEFAULT_FILTERS);
+
+    if (user?.user_type === "talent") {
+    return <AvailableWork />;
+    }
 
   return (
     <>

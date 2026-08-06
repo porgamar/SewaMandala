@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 // const profileRoutes = require('./routes/profile');
 const contactRoutes = require('./routes/contact');
 const profileRoutes = require('./routes/profileRoutes');
+const adminRoutes = require('./routes/admin');
 const jobsRoutes = require("./routes/jobsRoutes");
 
 const talentsRouter = require("./routes/talentRoutes");
@@ -36,6 +37,7 @@ app.use("/api/talents", talentsRouter);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/talents", talentRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/jobs", jobsRoutes);
 
 app.listen(PORT, () => {

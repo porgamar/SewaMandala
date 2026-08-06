@@ -10,7 +10,7 @@ import Create from "../assets/create1.jpg"
 import Find from "../assets/findC.png"
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ToggleBtn({ activeButton, setActiveButton }) {
     return (
@@ -88,6 +88,14 @@ function WOrkingContent() {
 
 function IndexPage() {
     const [activeButton, setActiveButton] = useState('hiring')
+    const [searchTerm, setSearchTerm] = useState('')
+    const navigate = useNavigate()
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const term = searchTerm.trim()
+        navigate(`/Explore${term ? `?search=${encodeURIComponent(term)}` : ""}`)
+    }
     return (
         <>
             <div className="relative w-full min-h-[350px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[650px] overflow-hidden">
@@ -103,13 +111,16 @@ function IndexPage() {
                     <p className="mb-3 sm:mb-6 md:mb-10 max-w-[90%] sm:max-w-sm md:max-w-xl text-white font-poppins text-xs sm:text-base md:text-lg lg:text-xl">
                         Connect with trusted freelancers and local service providers for every task, big or small.
                     </p>
-                    <form className="relative w-full max-w-[90%] sm:max-w-md md:max-w-2xl">
+                    <form onSubmit={handleSearch} className="relative w-full max-w-[90%] sm:max-w-md md:max-w-2xl">
                         <input
                             type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             className="border-white border border-solid rounded-full w-full text-sm sm:text-base md:text-lg py-2 sm:py-3 pl-4 pr-16 sm:pr-24 bg-white placeholder-gray-300"
                             placeholder="What are you looking for?"
                         />
                         <button
+                            type="submit"
                             className="btn absolute right-1 top-1 bottom-1 px-3 sm:px-6 font-poppins bg-black rounded-full text-white text-xs sm:text-base"
                             name="search"
                         >

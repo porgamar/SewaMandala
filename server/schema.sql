@@ -76,3 +76,49 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 FOR EACH ROW
 EXECUTE FUNCTION create_profile();
+
+ALTER TABLE profiles ADD COLUMN skills JSONB DEFAULT '[]'::jsonb;
+
+CREATE TABLE jobs (
+    id SERIAL PRIMARY KEY,
+    client_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+
+    title VARCHAR(255) NOT NULL,
+    job_type VARCHAR(100) NOT NULL,
+    budget NUMERIC(10,2),
+    description TEXT,
+    location VARCHAR(255),
+    image VARCHAR(255),
+
+    status VARCHAR(20) DEFAULT 'open',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE job_applications (
+    id SERIAL PRIMARY KEY,
+
+    job_id INTEGER UNIQUE REFERENCES jobs(id) ON DELETE CASCADE,
+
+    talent_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+
+    status VARCHAR(20) DEFAULT 'accepted',
+
+    rating INTEGER,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE ratings (
+    id SERIAL PRIMARY KEY,
+    job_id INTEGER REFERENCES jobs(id) ON DELETE CASCADE,
+    client_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    talent_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    stars INTEGER NOT NULL CHECK (stars BETWEEN 1 AND 5),
+    review TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- add_talent_filters.sql
+ALTER TABLE talent ADD COLUMN category VARCHAR(100);
+ALTER TABLE talent ADD COLUMN delivery_time VARCHAR(20) DEFAULT 'anytime'
+  CHECK (delivery_time IN ('express', 'upto7', 'upto3', 'anytime'));

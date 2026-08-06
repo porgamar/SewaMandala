@@ -12,6 +12,7 @@ const getProfile = async (req, res) => {
         u.user_type,
         u.created_at,
         p.full_name,
+        p.image,
         p.bio,
         p.rating,
         p.profile_views,
@@ -73,17 +74,16 @@ const updateProfile = async (req, res) => {
       return res.status(404).json({ error: "Profile not found." });
     }
 
-    // If skills were provided, replace the user's skills array
+    //If skills were provided, replace the user's skills array
     if (Array.isArray(skills)) {
       const cleaned = skills
         .map((s) => (typeof s === "string" ? s.trim() : ""))
         .filter(Boolean);
 
-      await pool.query(
-        `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
-        [userId, cleaned]
+     await pool.query(
+     `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
+     [userId, JSON.stringify(cleaned)]
       );
-    }
 
     // Return the updated profile
     const updated = await getProfileByUserId(userId);
@@ -104,6 +104,7 @@ async function getProfileByUserId(userId) {
       u.user_type,
       u.created_at,
       p.full_name,
+      p.image,
       p.bio,
       p.rating,
       p.profile_views,

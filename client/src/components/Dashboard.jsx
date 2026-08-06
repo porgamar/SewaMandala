@@ -128,7 +128,9 @@ export default function Dashboard() {
     );
   }
 
-  const isClient = profile.user_type === 'client';
+const isClient = profile.user_type === 'client';
+  const isAdmin = profile.user_type === 'admin';
+  const roleLabel = isAdmin ? 'Admin' : isClient ? 'Client' : 'Talent';
   const skillsCount = selectedSkills.length;
   const handle = profile.username || profile.full_name?.toLowerCase().replace(/\s+/g, '') || profile.email?.split('@')[0] || 'profile';
 
@@ -149,8 +151,8 @@ export default function Dashboard() {
            profile.full_name?.charAt(0).toUpperCase() || "U"
              )}
 </div>
-              <div>
-                <p className="profile-label">{isClient ? 'Client' : 'Talent'} Profile</p>
+<div>
+                <p className="profile-label">{roleLabel} Profile</p>
                 <h1 className="profile-name">{profile.full_name || profile.email}</h1>
                 <p className="profile-handle">@{handle}</p>
               </div>
@@ -158,7 +160,7 @@ export default function Dashboard() {
 
             <div className="profile-meta">
               <span className={`badge-pill badge-${profile.user_type}`}>
-                {isClient ? 'Client' : 'Talent'}
+                {roleLabel}
               </span>
               <span className="meta-item">Joined {formatDate(profile.created_at)}</span>
               <span className="meta-item">{profile.email}</span>

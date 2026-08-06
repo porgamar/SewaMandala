@@ -29,6 +29,48 @@ import {
 
 const ADMIN_EMAIL = "admin@sewamandala.com";
 
+// Redirect authenticated admins away from any non-admin route
+function RedirectAdmin({ children }) {
+  const { isAuthenticated, loading, user } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="auth-page">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isAuthenticated && user?.user_type === "admin") {
+    return <Navigate to="/admin" replace />;
+  }
+
+  return children;
+}
+
+// Only allow admin user_type to access the admin page
+function AdminOnlyRoute({ children }) {
+  const { isAuthenticated, loading, user } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="auth-page">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user?.user_type !== "admin") {
+    return <Navigate to="/home" replace />;
+  }
+
+  return children;
+}
+
 function PublicOnlyRoute({ children }) {
   const { isAuthenticated, loading, user } = useAuth();
 
@@ -57,9 +99,12 @@ function SiteChrome({ children }) {
     return children;
   }
 
-  return (
+return (
     <>
+      <Navbar />
       {children}
+      <StickyButton />
+      <Footer />
     </>
   );
 }
@@ -69,42 +114,107 @@ function App() {
     <AuthProvider>
       <Router>
         <SiteChrome>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<IndexPage />} />
-            <Route path="/home" element={<IndexPage />} />
-
-            <Route path="/explore" element={<ExplorePage />} />
-            <Route path="/ourteam" element={<OurTeam />} />
-            <Route path="/services" element={<Services />} />
-
-            <Route path="/client" element={<Client />} />
-            <Route path="/available-work" element={<AvailableWork />} />
+<Routes>
+            <Route
+              path="/"
+              element={
+                <RedirectAdmin>
+                  <IndexPage />
+                </RedirectAdmin>
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <RedirectAdmin>
+                  <IndexPage />
+                </RedirectAdmin>
+              }
+            />
 
             <Route
+              path="/explore"
+              element={
+                <RedirectAdmin>
+                  <ExplorePage />
+                </RedirectAdmin>
+              }
+            />
+            <Route
+              path="/ourteam"
+              element={
+                <RedirectAdmin>
+                  <OurTeam />
+                </RedirectAdmin>
+              }
+            />
+            <Route
+              path="/services"
+              element={
+                <RedirectAdmin>
+                  <Services />
+                </RedirectAdmin>
+              }
+            />
+
+            <Route
+              path="/client"
+              element={
+                <RedirectAdmin>
+                  <Client />
+                </RedirectAdmin>
+              }
+            />
+            <Route
+              path="/available-work"
+              element={
+                <RedirectAdmin>
+                  <AvailableWork />
+                </RedirectAdmin>
+              }
+            />
+
+<Route
               path="/current-work"
               element={
-                <ProtectedRoute>
-                  <CurrentWork />
-                </ProtectedRoute>
+                <RedirectAdmin>
+                  <ProtectedRoute>
+                    <CurrentWork />
+                  </ProtectedRoute>
+                </RedirectAdmin>
               }
             />
 
             <Route
               path="/talent"
               element={
-                <TalentOnlyRoute>
-                  <Talent />
-                </TalentOnlyRoute>
+                <RedirectAdmin>
+                  <TalentOnlyRoute>
+                    <Talent />
+                  </TalentOnlyRoute>
+                </RedirectAdmin>
+              }
+            />
+
+            <Route
+              path="/chat"
+              element={
+                <RedirectAdmin>
+                  <ProtectedRoute>
+                    <Chat />
+                  </ProtectedRoute>
+                </RedirectAdmin>
               }
             />
 
             <Route
               path="/chat/:jobId"
               element={
-                <ProtectedRoute>
-                  <Chat />
-                </ProtectedRoute>
+                <RedirectAdmin>
+                  <ProtectedRoute>
+                    <Chat />
+                  </ProtectedRoute>
+                </RedirectAdmin>
               }
             />
 
@@ -129,24 +239,24 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
+                <RedirectAdmin>
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                </RedirectAdmin>
               }
             />
 
             <Route
               path="/admin"
               element={
-                <ProtectedRoute>
+                <AdminOnlyRoute>
                   <AdminPanel />
-                </ProtectedRoute>
+                </AdminOnlyRoute>
               }
             />
-          </Routes>
+</Routes>
         </SiteChrome>
-        <StickyButton />
-        <Footer />
       </Router>
     </AuthProvider>
   );

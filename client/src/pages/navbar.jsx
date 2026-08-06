@@ -9,7 +9,7 @@ function Navbar() {
     const { isAuthenticated, user, logout } = useAuth();
     const navigate = useNavigate();
 
-    const isAdmin = user?.email === "admin@sewamandala.com";
+const isAdmin = user?.user_type === "admin";
 
     const handleProfileClick = () => {
         setProfileMenuOpen(false);

@@ -54,7 +54,7 @@ export default function AvailableWork() {
     );
   }
 
-  if (user?.user_type === "client") {
+if (user?.user_type !== "talent") {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-xl p-8 text-center">
@@ -63,7 +63,7 @@ export default function AvailableWork() {
         </h2>
 
         <p className="text-gray-600">
-          Clients cannot access the Available Work page.
+          Only talents can view and accept available work.
         </p>
       </div>
     </div>

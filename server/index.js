@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 // const profileRoutes = require('./routes/profile');
 const contactRoutes = require('./routes/contact');
 const profileRoutes = require('./routes/profileRoutes');
+const jobsRoutes = require("./routes/jobsRoutes");
 
 const talentsRouter = require("./routes/talentRoutes");
 
@@ -34,8 +35,8 @@ app.use('/api/profileRoutes', profileRoutes);
 app.use("/api/talents", talentsRouter);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use("/api/talents", talentRoutes);
+app.use("/api/jobs", jobsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

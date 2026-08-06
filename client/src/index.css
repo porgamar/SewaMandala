@@ -260,10 +260,15 @@
     }
 }
 
-
-
 .profile-avatar {
-    @apply flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-green-500 text-3xl font-bold text-white shadow-lg;
+    @apply flex h-20 w-20 items-center justify-center overflow-hidden rounded-[1.5rem] bg-green-500 text-3xl font-bold text-white shadow-lg;
+}
+
+.profile-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .profile-label {

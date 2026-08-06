@@ -80,11 +80,10 @@ const updateProfile = async (req, res) => {
         .map((s) => (typeof s === "string" ? s.trim() : ""))
         .filter(Boolean);
 
-      await pool.query(
-    `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
-    [userId, JSON.stringify(cleaned)]  // stringify for jsonb
-  );
-    }
+     await pool.query(
+     `UPDATE profiles SET skills = $2 WHERE user_id = $1`,
+     [userId, JSON.stringify(cleaned)]
+      );
 
     // Return the updated profile
     const updated = await getProfileByUserId(userId);

@@ -1,7 +1,6 @@
 import Navbar from "./pages/navbar";
 import Footer from "./pages/footer";
 import IndexPage from "./pages/home";
-import UserProfile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
 import Client from "./pages/client_listing";
 import Talent from "./pages/talent_listing";
@@ -64,7 +63,6 @@ function App() {
           <Route path="/home" element={<IndexPage />} />
 
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/profile" element={<UserProfile />} />
           <Route path="/client" element={<Client />} />
           <Route path="/talent" element={<Talent />} />
           <Route path="/available-work" element={<AvailableWork/>}/>

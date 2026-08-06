@@ -14,13 +14,12 @@ const STATS = [
   { num: "0", label: "Departments in active service" },
 ];
 
-// Replace with your own Formspree form ID (formspree.io) — free tier works fine
-// for a low-volume org contact form and needs no backend of your own.
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// Your Express API
+const API_BASE = "http://localhost:5000";
 
 function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error | unauthenticated
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,13 +29,27 @@ function ContactForm() {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("unauthenticated");
+      return;
+    }
+
     setStatus("sending");
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(`${API_BASE}/api/contact`, {
         method: "POST",
-        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(form),
       });
+
+      if (res.status === 401) {
+        setStatus("unauthenticated");
+        return;
+      }
       if (res.ok) {
         setStatus("sent");
         setForm({ name: "", email: "", message: "" });
@@ -117,6 +130,12 @@ function ContactForm() {
           className="bg-white border border-black/10 rounded-lg px-3 py-2 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:border-[#4881E3] transition resize-none"
         />
       </div>
+
+      {status === "unauthenticated" && (
+        <p className="text-sm text-[#c26a1f]">
+          Please log in to send a message.
+        </p>
+      )}
 
       {status === "error" && (
         <p className="text-sm text-[#c26a1f]">

@@ -1,7 +1,3 @@
-CREATE DATABASE auth_db;
-
-\c auth_db;
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -60,6 +56,24 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER after_user_insert
 AFTER INSERT ON users
+FOR EACH ROW EXECUTE FUNCTION create_profile();
+
+allow_Admin_type.sql
+ALTER TABLE users DROP CONSTRAINT users_user_type_check;
+ALTER TABLE users ADD CONSTRAINT users_user_type_check
+  CHECK (user_type IN ('client', 'talent', 'admin'));
+  INSERT INTO users (email, password, user_type)
+VALUES ('admin@sewamandala.com', '$2a$10$OBXkz.yyKWaU.oF.S/5aie6XNVlULqU7rThUGra7CdBYDYzHrANZS', 'admin');
+
+-- Contact form submissions
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 FOR EACH ROW
 EXECUTE FUNCTION create_profile();
 
@@ -104,3 +118,7 @@ CREATE TABLE ratings (
     review TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- add_talent_filters.sql
+ALTER TABLE talent ADD COLUMN category VARCHAR(100);
+ALTER TABLE talent ADD COLUMN delivery_time VARCHAR(20) DEFAULT 'anytime'
+  CHECK (delivery_time IN ('express', 'upto7', 'upto3', 'anytime'));

@@ -1,6 +1,5 @@
 import Navbar from "./pages/navbar";
 import Footer from "./pages/footer";
-
 import IndexPage from "./pages/home";
 import UserProfile from "./pages/profile";
 import ExplorePage from "./pages/Explore";
@@ -14,7 +13,9 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
+import AvailableWork from "./components/AvailableWork";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CurrentWork from "./components/CurrentWork";
 import {
   BrowserRouter as Router,
   Routes,
@@ -51,7 +52,7 @@ function App() {
             <Route path="/Services" element={<Services />} />
             
             <Route
-    path="/chat"
+    path="/chat/:jobId"
     element={
         <ProtectedRoute>
             <Chat />
@@ -66,7 +67,8 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/client" element={<Client />} />
           <Route path="/talent" element={<Talent />} />
-
+          <Route path="/available-work" element={<AvailableWork/>}/>
+          <Route path="/current-work"element={<ProtectedRoute><CurrentWork /></ProtectedRoute>}/>
           <Route path="/services" element={<Services />} />
           <Route path="/ourteam" element={<OurTeam />} />
 

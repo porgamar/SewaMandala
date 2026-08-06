@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import CurrentWork from "./CurrentWork";
 import api from '../api/client';
 
 function StatCard({ label, value, icon }) {
@@ -137,9 +138,19 @@ export default function Dashboard() {
         <div className="profile-grid">
           <div className="profile-summary-card">
             <div className="profile-avatar-row">
-              <div className="profile-avatar">{profile.full_name?.charAt(0).toUpperCase() || 'U'}</div>
+              <div className="profile-avatar">
+            {profile.image ? (
+           <img
+           src={`http://localhost:5000/uploads/${profile.image}`}
+            alt="Profile"
+            className="profile-avatar-image"
+           />
+            ) : (
+           profile.full_name?.charAt(0).toUpperCase() || "U"
+             )}
+</div>
               <div>
-                <p className="profile-label">Talent Profile</p>
+                <p className="profile-label">{isClient ? 'Client' : 'Talent'} Profile</p>
                 <h1 className="profile-name">{profile.full_name || profile.email}</h1>
                 <p className="profile-handle">@{handle}</p>
               </div>
@@ -259,6 +270,7 @@ export default function Dashboard() {
               <p className="review-text">
                 {profile.bio || 'No review available yet. Keep your profile updated to receive more feedback.'}
               </p>
+              <CurrentWork />
             </div>
           </div>
         </div>

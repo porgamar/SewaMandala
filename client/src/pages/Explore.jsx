@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import AvailableWork from "../components/AvailableWork";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 
 const MIN_PRICE = 0;
@@ -96,6 +96,7 @@ function BudgetSlider({ min, max, value, onChange, disabled }) {
 
 function ExplorePage() {
   const [searchParams,] = useSearchParams();
+  const navigate = useNavigate();
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -513,8 +514,14 @@ function ExplorePage() {
                                 </h2>
                               </div>
                               <div className="flex items-center gap-3">
-                                <div className="border flex justify-center text-white font-semibold bg-blue-600 px-4 sm:px-5 py-2 rounded-md hover:bg-blue-700">
-                                  <button className="flex justify-between items-center gap-2">Chat
+<div className="border flex justify-center text-white font-semibold bg-blue-600 px-4 sm:px-5 py-2 rounded-md hover:bg-blue-700">
+                                  <button
+                                    onClick={() =>
+                                      navigate(`/chat?user=${showCard.userId}`)
+                                    }
+                                    className="flex justify-between items-center gap-2"
+                                  >
+                                    Chat
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-text-icon lucide-message-square-text"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /><path d="M7 11h10" /><path d="M7 15h6" /><path d="M7 7h8" /></svg>
                                   </button>
                                 </div>

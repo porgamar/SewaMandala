@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { API_BASE } from "../config";
+import { useSearchParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import {
@@ -14,12 +15,36 @@ import NewChatModal from "../components/chat/NewChatModal";
 
 export default function Chat() {
   const { token, user } = useAuth();
+  const [searchParams] = useSearchParams();
 
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chats, setChats] = useState([]);
-  const [showNewChat, setShowNewChat] = useState(false);
+const [showNewChat, setShowNewChat] = useState(false);
+
+  // If a user id is passed via ?user=<id>, open that conversation directly
+  useEffect(() => {
+    const preselectedId = searchParams.get("user");
+    if (!preselectedId || !user || !token) return;
+
+    axios
+      .post(
+        `${API_BASE}/users/by-ids`,
+        { ids: [preselectedId] },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setSelectedUser(data[0]);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [searchParams, user, token]);
 
  
 

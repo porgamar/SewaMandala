@@ -1,7 +1,9 @@
 import { useState } from "react";
 import api from "../api/client";
+import { useAuth } from "../context/AuthContext";
 
 export default function Client_list(){
+const { user } = useAuth();
 
 const [formData, setFormData] = useState({
   title: "",
@@ -88,6 +90,19 @@ setFormData({
     alert("Failed to post job.");
   }
 };
+
+if (user?.user_type === "admin") {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-8">
+      <div className="bg-white shadow-lg rounded-xl p-8 text-center max-w-md">
+        <h2 className="text-2xl font-bold mb-3">Access Denied</h2>
+        <p className="text-gray-600">
+          Admins cannot post or list jobs.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 return(
 <div className="min-h-screen p-8">

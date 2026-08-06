@@ -18,8 +18,7 @@ const getProfile = async (req, res) => {
         p.profile_views,
         p.projects_posted,
         p.hires_made,
-        p.applications_sent,
-        p.skills
+        p.applications_sent
       FROM profiles p
       JOIN users u
         ON u.id = p.user_id
@@ -36,8 +35,8 @@ const getProfile = async (req, res) => {
 
     const profile = profileResult.rows[0];
 
-    // skills is stored as an array on the profiles table
-    profile.skills = Array.isArray(profile.skills) ? profile.skills : [];
+    // skills is stored as an array on the profiles table when available
+    profile.skills = [];
 
     // Derive a username handle from full_name or email if not present
     profile.username =
@@ -116,8 +115,7 @@ async function getProfileByUserId(userId) {
       p.profile_views,
       p.projects_posted,
       p.hires_made,
-      p.applications_sent,
-      p.skills
+      p.applications_sent
     FROM profiles p
     JOIN users u
       ON u.id = p.user_id
@@ -127,7 +125,7 @@ async function getProfileByUserId(userId) {
   );
 
   const profile = profileResult.rows[0];
-  profile.skills = Array.isArray(profile.skills) ? profile.skills : [];
+  profile.skills = [];
   profile.username =
     profile.full_name?.toLowerCase().replace(/\s+/g, "") ||
     profile.email?.split("@")[0] ||
